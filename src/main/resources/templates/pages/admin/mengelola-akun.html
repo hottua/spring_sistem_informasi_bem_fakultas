@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org" xmlns:xlmns="http://www.w3.org/1999/xhtml"
+      layout:decorator="/index" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Pengelolaan Akun</title>
+    <link rel="stylesheet" th:href="@{/plugins/datepicker/datepicker3.css}" />
+    <link rel="stylesheet" th:href="@{/plugins/daterangepicker/daterangepicker.css}" />
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="content" >
+    <div class="container">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>Pengelolaan Akun</h1>
+            <ol class="breadcrumb">
+                <li><a href="#">Administrator</a></li>
+                <li class="active">Pengelolaan Akun</li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <form class="form" th:action="@{/admin/mengelola_akun}" method="post" onsubmit="return checkPassword()">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><span class="fa fa-user-plus"></span> Register Mahasiswa</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <p th:if="${#fields.hasErrors('akun.email')}" th:errors="${akun.email}" class="text-red"></p>
+                                    <input type="email" class="form-control" id="email" th:field="${akun.email}"  placeholder="Masukkanlah email" required="required"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>NIM</label>
+                                    <p th:if="${#fields.hasErrors('mahasiswa.nim')}" th:errors="${mahasiswa.nim}" field="nim" class="text-red"></p>
+                                    <input type="text" class="form-control" id="nim" th:field="${mahasiswa.nim}" name="nim" placeholder="Masukkan Nim" required="required"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nama Lengkap</label>
+                                    <input type="text" class="form-control" id="namaLengkap" th:field="${mahasiswa.namaLengkap}" placeholder="Masukkan Nama Lengkap" required="required"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Alamat</label>
+                                    <input type="text" class="form-control" id="alamat" th:field="${mahasiswa.alamat}" placeholder="Masukkan Alamat" required="required"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <p th:if="${#fields.hasErrors('akun.password')}" th:errors="${akun.password}" class="text-red"></p>
+                                    <input type="password" class="form-control" id="password" th:field="${akun.password}" placeholder="Masukkan Password"  required="required"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Ulangi Password</label>
+                                    <p id="validatePasswordConfirm" class="text-yellow">Password tidak sama</p>
+                                    <input type="password" class="form-control" id="passwordConfirm" placeholder="Ulangi Masukkan Password" />
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" th:if="${not #lists.isEmpty(daftarKelas)}">
+                                    <label>Kelas</label>
+                                    <select class="form-control select2" th:field="${mahasiswa.kelas}" style="width: 100%;">
+                                        <div th:each="kelas : ${daftarKelas}">
+                                            <option th:value="${kelas.id}" th:text="${kelas.kodeKelas}+' '+${kelas.deskripsi}" ></option>
+                                        </div>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tanggal Lahir</label>
+                                    <p th:if="${#fields.hasErrors('mahasiswa.tglLahir')}" th:errors="${mahasiswa.tglLahir}" name="tglLahir" class="text-red"></p>
+                                    <input type="text" th:field="${mahasiswa.tglLahir}" name="tglLahir" class="form-control date" id="datepicker" placeholder="Pilih tanggal lahir"  required="required"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Jenis Kelamin</label>
+                                    <select class="form-control select2" th:field="${mahasiswa.jnsKelamin}" style="width: 100%;">
+                                        <option th:value="'Laki-Laki'" selected="selected">Laki-Laki</option>
+                                        <option th:value="'Perempuan'">Perempuan</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" th:if="${not #lists.isEmpty(daftarJabatan)}">
+                                    <label>Jabatan</label>
+                                    <select class="form-control select2" th:field="${mahasiswaJabatan.jabatan}" style="width: 100%;">
+                                        <div th:each="jabatan : ${daftarJabatan}">
+                                            <option th:value="${jabatan.id}" th:text="${jabatan.namaJabatan}"></option>
+                                        </div>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Masa Jabatan</label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Mulai</label>
+                                                <p th:if="${#fields.hasErrors('mahasiswaJabatan.start')}" th:errors="${mahasiswaJabatan.start}" class="text-red"></p>
+                                                <input type="text" class="form-control pull-right" id="startPeriode" th:field="${mahasiswaJabatan.start}" placeholder="Tanggal mulai" required="required"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Berakhir</label>
+                                                <p th:if="${#fields.hasErrors('mahasiswaJabatan.end')}" th:errors="${mahasiswaJabatan.end}" class="text-red"></p>
+                                                <input type="text" class="form-control pull-right" id="endPeriode" th:field="${mahasiswaJabatan.end}" placeholder="Tanggal berakhir" required="required"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Periode Jabatan</label>
+                                                <p th:if="${#fields.hasErrors('mahasiswaJabatan.periodeJabatan')}" th:errors="${mahasiswaJabatan.periodeJabatan}" class="text-red"></p>
+                                                <input type="text" class="form-control pull-right"  th:field="${mahasiswaJabatan.periodeJabatan}" placeholder="Periode Jabatan 2014/2015" required="required"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary" id="btnRegister">Register</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title"> <span class="fa fa-users"></span> Daftar Mahasiswa</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>NIM</th>
+                                    <th>Nama Lengkap</th>
+                                    <th>Kelas</th>
+                                    <th>Prodi</th>
+                                    <th>Alamat</th>
+                                    <th>Tanggal Lahir</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="m : ${daftarMahasiswa}">
+                                    <td th:text="${m.id}"></td>
+                                    <td th:text="${m.nim}"></td>
+                                    <td th:text="${m.namaLengkap}"></td>
+                                    <td th:text="${m.kelas.kodeKelas}"></td>
+                                    <td th:text="${m.kelas.prodi.namaProdi}"></td>
+                                    <td th:text="${m.alamat}"></td>
+                                    <td th:text="${m.tglLahir}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+
+        </section>
+    </div>
+</div>
+
+<div layout:fragment="script" >
+    <!-- DataTables -->
+    <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/plugins/datatables/dataTables.bootstrap.min.js}"></script>
+    <!-- SlimScroll -->
+    <script th:src="@{/plugins/slimScroll/jquery.slimscroll.min.js}"></script>
+    <!-- FastClick -->
+    <script th:src="@{/plugins/fastclick/fastclick.js}"></script>
+    <!-- AdminLTE App -->
+    <script th:src="@{/dist/js/app.min.js}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script th:src="@{/dist/js/demo.js}"></script>
+    <script th:src="@{/plugins/datepicker/bootstrap-datepicker.js}"></script>
+
+    <!--Date Range Picker-->
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js}"></script>
+    <script th:src="@{/plugins/daterangepicker/daterangepicker.js}"></script>
+    <!-- page script -->
+    <script>
+        /*<![CDATA[*/
+        $(function () {
+            $("#example1").DataTable();
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
+            $('#reservation').daterangepicker();
+            //Date picker
+            $('#datepicker').datepicker({
+                autoclose: true,
+            });
+
+            $('#startPeriode').datepicker({
+                autoclose: true
+            });
+            $('#endPeriode').datepicker({
+                autoclose: true
+            });
+        });
+        $("#validatePasswordConfirm").hide();
+
+        function checkPassword()
+        {
+            var password = document.getElementById("password").value;
+            var passwordConfirm = document.getElementById("passwordConfirm").value;
+            var isValid = true;
+            if(password != passwordConfirm)
+            {
+                $("#validatePasswordConfirm").show();
+                document.getElementById("password").style.borderColor = "#e31f16";
+                document.getElementById("passwordConfirm").style.borderColor = "#e31f16";
+                isValid = false;
+            }
+            return isValid;
+        }
+        /*]]>*/
+    </script>
+</div>
+
+</body>
+</html>

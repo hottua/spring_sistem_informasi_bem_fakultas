@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org"
+      layout:decorator="/index" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Mengelola Kelas</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+</head>
+<body>
+<!-- /.box-header -->
+<div class="box-body" th:fragment="resultDokumenList">
+    <table id="tabelDaftarKelas" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Judul</th>
+            <th>Tanggal Unggah</th>
+            <th>Oleh</th>
+            <th>Option</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="d : ${dokumens}">
+            <td th:text="${d.id}"></td>
+            <td><a th:href="'/user/dokumen/'+${d.id}" th:text="${d.jdlDokumen}"></a></td>
+            <td th:text="${d.tglDibuat}"></td>
+            <td th:text="${d.mahasiswa.namaLengkap}"></td>
+            <td>
+                <a class="btn btn-xs" th:href="'/user/dokumen/detail/'+${d.id}"><span class="fa  fa-cloud-download"></span> Download</a>
+                <a th:if="${d.mahasiswa == mahasiswaJabatanLogged.mahasiswa}" class="btn btn-xs" method="post" th:onclick="'onKlik('+${d.id}+')'"><span class="fa fa-trash"></span> Delete</a>
+            </td>
+        </tr>
+        <tr>
+            <td th:if="${#lists.isEmpty(dokumens)}" th:colspan="5" style="text-align: center">Dokumen tidak ditemukan</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

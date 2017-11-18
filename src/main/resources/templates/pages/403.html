@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="/index">
+<head>
+    <title>Access is denied</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+</head>
+<body>
+
+<div class="content-wrapper" layout:fragment="content">
+    <div class="container" >
+        <section class="content-header">
+            <ol class="breadcrumb">
+                <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">403 Access is denied</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="error-page">
+                <h2 class="headline text-yellow"> 403</h2>
+
+                <div class="error-content">
+                    <h3><i class="fa fa-warning text-yellow"></i> Access is denied</h3>
+                    <p>
+                        Halaman ini hanya bisa diakses oleh pihak tertentu saja.<br></br>
+                        <a th:href="@{/}">Kembali ke dashboard</a>
+                    </p>
+                </div>
+                <!-- /.error-content -->
+            </div>
+            <!-- /.error-page -->
+        </section>
+        <!-- /.content -->
+    </div>
+</div>
+</body>
+</html>

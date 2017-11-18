@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org"
+      layout:decorator="/index" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Mengelola Kelas</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+</head>
+<body>
+
+<div class="content-wrapper" layout:fragment="content" >
+    <div class="container">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>Pengelolaan Kelas</h1>
+            <ol class="breadcrumb">
+                <li><a href="#">Administrator</a></li>
+                <li class="active">Pengelolaan Kelas</li>
+            </ol>
+        </section>
+
+        <section class="content col-md-6">
+            <form class="form" th:object="${kelas}" method="post" th:action="@{/admin/add-kelas}">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><span class="fa fa-plus"></span> Menambah Kelas</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Kode Kelas</label>
+                                    <input type="text" class="form-control" th:field="*{kodeKelas}" id="kodeKelas" placeholder="Masukkan Kode Kelas" required="required" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Nama Kelas</label>
+                                    <input type="text" class="form-control" th:field="*{deskripsi}" id="deskripsi" placeholder="Masukkan Nama Deskripsi" required="required"/>
+                                </div>
+                                <label>Kode Prodi</label>
+                                <select class="form-control select2" th:field="*{prodi}" style="width: 100%;">
+                                    <div th:each="prodi : ${daftarProdi}">
+                                        <option th:value="${prodi.id}" th:text="${prodi.namaProdi}"></option>
+                                    </div>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <section class="content col-md-6">
+            <form class="form" method="post" th:action="@{/admin/add-prodi}" th:object="${prodi}">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><span class="fa fa-plus"></span> Menambah Program Studi</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Kode Kelas</label>
+                                    <input type="text" class="form-control" id="kodeProdi" th:field="*{kodeProdi}" placeholder="Masukkan Kode Prodi" required="required"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nama Kelas</label>
+                                    <input type="text" class="form-control" id="namaProdi" th:field="*{namaProdi}" placeholder="Masukkan Nama Prodi" required="required"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+    <div id="resultBlokKelas">
+
+    </div>
+</div>
+
+<div layout:fragment="script" >
+    <!-- jQuery 2.2.3 -->
+    <script th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <!-- DataTables -->
+    <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/plugins/datatables/dataTables.bootstrap.min.js}"></script>
+    <!-- SlimScroll -->
+    <script th:src="@{/plugins/slimScroll/jquery.slimscroll.min.js}"></script>
+    <!-- FastClick -->
+    <script th:src="@{/plugins/fastclick/fastclick.js}"></script>
+    <!-- AdminLTE App -->
+    <script th:src="@{/dist/js/app.min.js}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script th:src="@{/dist/js/demo.js}"></script>
+
+    <script>
+        var urlDaftar = '/admin/daftarKelas';
+        $("#resultBlokKelas").load(urlDaftar);
+
+        $('#myAlert').hidePopup();
+        $(function () {
+            $("#tabelDaftarKelas").DataTable();
+            $('#tabelDaftarKelas1').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": false,
+                "info": false,
+                "autoWidth": false
+            });
+        });
+
+    </script>
+
+</div>
+</body>
+</html>

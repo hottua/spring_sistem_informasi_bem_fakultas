@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="/index">
+<head>
+    <title>Daftar Aspirasi</title>
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <div class="container" >
+        <section class="content-header">
+            <h1>
+               Aspirasi
+
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="/user/aspirasi/daftar-aspirasi"><i class="fa fa-list"></i> Aspirasi</a></li>
+                <li><a href="/user/aspirasi/daftar-aspirasi"> Daftar Aspirasi</a></li>
+                <li class="active" th:text="${aspirasi.judulAspirasi}"></li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <section class="col-lg-12">
+                    <div class="box box-widget">
+                        <div class="box-header with-border">
+                            <h3 class="box-title" th:text="${aspirasi.judulAspirasi}"></h3><span class="mailbox-read-time pull-right" th:text="'Published : '+${aspirasi.tgl_dibuat}"></span>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <div th:remove="tag" th:utext="${aspirasi.isiAspirasi}"></div>
+                        </div><!-- /.box-body -->
+                    </div>
+                </section>
+
+            </div>
+
+        </section>
+    </div>
+</div>
+<div layout:fragment="script" >
+    <!-- DataTables -->
+    <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/plugins/datatables/dataTables.bootstrap.min.js}"></script>
+    <!-- SlimScroll -->
+    <script th:src="@{/plugins/slimScroll/jquery.slimscroll.min.js}"></script>
+    <!-- FastClick -->
+    <script th:src="@{/plugins/fastclick/fastclick.js}"></script>
+    <!-- AdminLTE App -->
+    <script th:src="@{/dist/js/app.min.js}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script th:src="@{/dist/js/demo.js}"></script>
+    <script th:src="@{/plugins/datepicker/bootstrap-datepicker.js}"></script>
+
+    <!--Date Range Picker-->
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js}"></script>
+    <script th:src="@{/plugins/daterangepicker/daterangepicker.js}"></script>
+    <!-- page script -->
+    <script>
+        /*<![CDATA[*/
+        $(function () {
+            $("#example1").DataTable();
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true
+            });
+        });
+
+        /*]]>*/
+    </script>
+</div>
+</body>
+</html>

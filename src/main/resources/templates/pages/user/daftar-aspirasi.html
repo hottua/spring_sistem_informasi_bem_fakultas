@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org" xmlns:xlmns="http://www.w3.org/1999/xhtml"
+      layout:decorator="/index" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Aspirasi</title>
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <div class="container" >
+        <section class="content-header">
+            <h1>Daftar Aspirasi</h1>
+            <ol class="breadcrumb">
+                <li><a href="/user/aspirasi/daftar-aspirasi"><i class="fa fa-file-pdf-o"></i> Aspirasi</a></li>
+                <li class="active">Daftar Aspirasi</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <section class="col-lg-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <a class="btn btn-default" th:href="'/user/aspirasi/tambah-aspirasi'"><i class="fa fa-upload"></i> Kirim Aspirasi</a>
+                            <div class="pull-right">
+
+                                <div class="box-tools">
+                                    <div class="input-group input-group-sm" style="width: 200px;">
+                                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" />
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div id="daftarAspirasi">
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+
+                </section>
+            </div>
+        </section>
+    </div>
+</div>
+<div layout:fragment="script" >
+
+    <script>
+        var urlDaftar = '/user/getAllAspirasi';
+        $("#daftarAspirasi").load(urlDaftar);
+
+    </script>
+
+</div>
+</body>
+</html>

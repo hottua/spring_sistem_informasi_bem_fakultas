@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorator="/index">
+<head>
+    <title>Daftar Pengumuman</title>
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <div class="container" >
+        <section class="content-header">
+            <h1>
+                Informasi
+            </h1>
+            <ol class="breadcrumb">
+                <li><a th:href="'/pengumuman/daftar-pengumuman'"><i class="fa fa-dashboard"></i> Informasi</a></li>
+                <li class="active">Daftar Informasi</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <section class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title"> <span class="fa fa-list"></span> Daftar Informasi</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Judul</th>
+                                    <th>Kategori</th>
+                                    <!--<th>Option</th>-->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="p : ${daftarPengumuman}">
+                                    <td th:text="${p.id}" style="width: 2pc"></td>
+                                    <td><a th:text="${p.judul}" th:href="'/pengumuman/daftar-pengumuman/detail/'+${p.id}"></a></td>
+                                    <td th:text="${p.kategoriPengumuman.namaKategori}"></td>
+                                    <!--<td><a  th:onclick="'onKlik()'"><i class="fa fa-trash"></i> Delete</a></td>-->
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </section>
+                <!-- /.col -->
+            </div>
+        </section>
+    </div>
+</div>
+<div layout:fragment="script" >
+    <!-- DataTables -->
+    <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/plugins/datatables/dataTables.bootstrap.min.js}"></script>
+    <!-- SlimScroll -->
+    <script th:src="@{/plugins/slimScroll/jquery.slimscroll.min.js}"></script>
+    <!-- FastClick -->
+    <script th:src="@{/plugins/fastclick/fastclick.js}"></script>
+    <!-- AdminLTE App -->
+    <script th:src="@{/dist/js/app.min.js}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script th:src="@{/dist/js/demo.js}"></script>
+    <script th:src="@{/plugins/datepicker/bootstrap-datepicker.js}"></script>
+
+    <!--Date Range Picker-->
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js}"></script>
+    <script th:src="@{/plugins/daterangepicker/daterangepicker.js}"></script>
+    <!-- page script -->
+    <script>
+        /*<![CDATA[*/
+        $(function () {
+            $("#example1").DataTable();
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true
+            });
+        });
+
+
+        /*]]>*/
+    </script>
+</div>
+</body>
+</html>

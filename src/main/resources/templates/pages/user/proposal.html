@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org"
+      layout:decorator="/index" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Mengelola Kelas</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+</head>
+<body>
+<!-- /.box-header -->
+<div class="box-body" th:fragment="resultProposalList">
+    <table id="tabelDaftarProposal" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Judul Proposal</th>
+            <th>Tanggal Unggah</th>
+            <th>Status</th>
+            <th>Oleh</th>
+            <th>Option</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${proposals}">
+            <td th:text="${p.id}"></td>
+            <td><a th:href="'/user/proposal/'+${p.id}" th:text="${p.judulDokumen}"></a></td>
+            <td th:text="${p.tglDibuat}"></td>
+            <td th:text="${p.status}"></td>
+            <td th:text="${p.mahasiswa.namaLengkap}"></td>
+            <td>
+                <!--<a  th:href="'/admin/mengelola_kelas/'+${kelas.id}"><span class="fa fa-edit"></span>Edit-->
+                <!--</a>-->
+                <a class="btn btn-xs" th:href="'/user/proposal/detail/'+${p.id}"><span class="fa  fa-cloud-download"></span> Download</a>
+                <a class="btn btn-xs" th:href="'/proposal/delete/'+${p.id}" th:if="${p.mahasiswa == mahasiswaJabatanLogged.mahasiswa}" onclick="return confirm('Are you sure you want to delete this item?');"><span class="glyphicon glyphicon-remove"></span> Delete</a></td>
+        </tr>
+        <tr>
+            <td th:if="${#lists.isEmpty(proposals)}" th:colspan="6" style="text-align: center">Dokumen tidak ditemukan</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function onKlik(idKelas) {
+            if (confirm("Hapus proposal dengan kode"+idKelas)) {
+                var url = '/proposal/delete/';
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/html",
+                    url: url + '/' + idKelas,
+                    dataType: 'json',
+                    cache: false,
+                    timeout: 600000
+                });
+
+            }
+        }
+
+    </script>
+
+</div>
+
+</body>
+</html>

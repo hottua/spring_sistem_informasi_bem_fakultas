@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org"
+      layout:decorator="/index" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Mengelola Kelas</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+</head>
+<body>
+<div th:fragment="resultKelasList">
+
+<div class="container" >
+    <section class="content col-md-12">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"> <span class="fa fa-list"></span> Daftar Kelas</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="tabelDaftarKelas" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Kode Kelas</th>
+                                <th>Deskripsi</th>
+                                <th>Nama Prodi</th>
+                                <th>Option</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="kelas : ${daftarKelas}" >
+                                <td th:text="${kelas.id}"></td>
+                                <td th:text="${kelas.kodeKelas}"></td>
+                                <td th:text="${kelas.deskripsi}"></td>
+                                <td th:text="${kelas.prodi.namaProdi}"></td>
+                                <td>
+                                    <a class="btn btn-xs" th:href="'/admin/mengelola_kelas/'+${kelas.id}"><span class="fa fa-edit"></span>Edit
+                                    </a>
+                                    <a class="btn btn-xs" method="post" th:onclick="'onKlik('+${kelas.id}+')'"><span class="fa fa-edit"></span> Delete</a>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+    </section>
+</div>
+
+<div layout:fragment="script" >
+    <!-- jQuery 2.2.3 -->
+    <script th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <!-- DataTables -->
+    <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/plugins/datatables/dataTables.bootstrap.min.js}"></script>
+    <!-- SlimScroll -->
+    <script th:src="@{/plugins/slimScroll/jquery.slimscroll.min.js}"></script>
+    <!-- FastClick -->
+    <script th:src="@{/plugins/fastclick/fastclick.js}"></script>
+    <!-- AdminLTE App -->
+    <script th:src="@{/dist/js/app.min.js}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script th:src="@{/dist/js/demo.js}"></script>
+
+    <script>
+        $('#myAlert').hidePopup();
+        $(function () {
+            $("#tabelDaftarKelas").DataTable();
+            $('#tabelDaftarKelas1').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": false,
+                "info": false,
+                "autoWidth": false
+            });
+        });
+        function onKlik(idKelas) {
+            if (confirm("Hapus Kelas dengan kode"+idKelas)) {
+                var url = '/admin/delete';
+                url = url + '/' + idKelas;
+//                $("#resultBlokKelas").load(url);
+                $("#resultBlokKelas").load(url);
+
+            }
+        }
+
+    </script>
+
+</div>
+</div>
+</body>
+</html>

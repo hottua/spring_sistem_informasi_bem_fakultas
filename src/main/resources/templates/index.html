@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org" xmlns:xlmns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Sstem Informasi BEM FTIE</title>
+    <link rel="stylesheet" th:href="@{/../bootstrap/css/bootstrap.min.css}" href="/bootstrap/css/bootstrap.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css}" />
+    <!-- Ionicons -->
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css}" />
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/../dist/css/AdminLTE.min.css}" href="/dist/css/AdminLTE.min.css" />
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" th:href="@{/../dist/css/skins/_all-skins.min.css}" href="/dist/css/skins/_all-skins.min.css" />
+    <!-- iCheck -->
+    <link rel="stylesheet" th:href="@{/../plugins/iCheck/flat/blue.css}" href="/plugins/iCheck/flat/blue.css" />
+    <!-- Morris chart -->
+    <link rel="stylesheet" th:href="@{/../plugins/morris/morris.css}" href="/plugins/morris/morris.css" />
+    <!-- jvectormap -->
+    <link rel="stylesheet" th:href="@{/../plugins/jvectormap/jquery-jvectormap-1.2.2.css}" href="/plugins/jvectormap/jquery-jvectormap-1.2.2.css" />
+    <!-- Date Picker -->
+    <link rel="stylesheet" th:href="@{/../plugins/datepicker/datepicker3.css}" href="/plugins/datepicker/datepicker3.css" />
+    <!-- Daterange picker -->
+    <link rel="stylesheet" th:href="@{/../plugins/daterangepicker/daterangepicker.css}" href="/plugins/daterangepicker/daterangepicker.css" />
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" th:href="@{../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css}" href="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" />
+</head>
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+    <header class="main-header">
+        <nav class="navbar navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a th:href="@{/home}" class="navbar-brand"><b>SIB FTIE </b> IT Del</a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li ><a th:href="@{/dashboard}"> Dashboard</a><span class="sr-only">(current)</span></li>
+                        <li class="dropdown">
+                            <a th:href="@{#}" class="dropdown-toggle" data-toggle="dropdown">Informasi <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a th:href="@{/pengumuman/daftar-pengumuman}">Daftar Informasi</a></li>
+                                <li><a th:href="@{/admin/pengumuman/create}">Buat Informasi</a></li>
+                            </ul>
+                        </li>
+                        <!--<li class="dropdown link">-->
+                            <!--<a th:href="@{#}" class="dropdown-toggle" data-toggle="dropdown">Diskusi <span class="caret"></span></a>-->
+                            <!--<ul class="dropdown-menu" role="menu">-->
+                                <!--<li><a th:href="@{#}">Daftar Diskusi</a></li>-->
+                                <!--<li><a th:href="@{#}">Buat Diskusi</a></li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                        <li class="dropdown">
+                            <a th:href="@{#}" class="dropdown-toggle" data-toggle="dropdown">Sharing File <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a th:href="'/user/dokumen/daftar-dokumen'">Daftar Dokumen</a></li>
+                                <li><a th:href="'/user/dokumen/ungah-dokumen'">Unggah Dokumen Baru</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar-custom-menu" >
+                    <ul class="nav navbar-nav">
+                        <!--Admin Menu-->
+                        <li class="dropdown notifications-menu" >
+                            <a th:href="@{#}" class="dropdown-toggle" data-toggle="dropdown">
+                                Menu Lainnya <span class="caret"></span></a>
+                            <ul class="dropdown-menu" >
+                                <li>
+                                    <!-- Inner Menu: contains the notifications -->
+                                    <ul class="menu">
+                                        <li><!-- start notification -->
+                                            <a th:href="'/user/aspirasi/tambah-aspirasi'">
+                                                <i class="fa fa-lightbulb-o text-aqua"></i> Kirim Aspirasi
+                                            </a>
+                                        </li>
+                                        <li><!-- start notification -->
+                                            <a th:href="'/user/aspirasi/daftar-aspirasi'">
+                                                <i class="fa fa-list text-aqua"></i> Daftar Aspirasi
+                                            </a>
+                                        </li>
+                                        <li><!-- start notification -->
+                                            <a th:href="@{/user/proposal/unggah-proposal}">
+                                                <i class="fa fa-cloud-upload text-aqua"></i> Kirim Proposal
+                                            </a>
+                                        </li>
+                                        <li><!-- start notification -->
+                                            <a th:href="@{/user/proposal/daftar-proposal}">
+                                                <i class="fa fa-list text-aqua"></i> Daftar Proposal
+                                            </a>
+                                        </li>
+                                        <li><!-- start notification -->
+                                            <a th:href="@{#}">
+                                                <i class="fa fa-comments text-aqua"></i> Daftar topik diskusi
+                                            </a>
+                                        </li>
+                                        <li><!-- start notification -->
+                                            <a href="/admin/mengelola_akun">
+                                                <i class="fa fa-users text-aqua"></i> Pengelolaan Akun
+                                            </a>
+                                        </li>
+                                        <!-- end notification -->
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--End Admin menu-->
+                        <!-- Notifications Menu -->
+                        <!--<li class="dropdown notifications-menu">-->
+                            <!--&lt;!&ndash; Menu toggle button &ndash;&gt;-->
+                            <!--<a th:href="@{#}" class="dropdown-toggle" data-toggle="dropdown">-->
+                                <!--<i class="fa fa-bell-o"></i>-->
+                                <!--<span class="label label-warning">10</span>-->
+                            <!--</a>-->
+                            <!--<ul class="dropdown-menu">-->
+                                <!--<li class="header">You have 10 notifications</li>-->
+                                <!--<li>-->
+                                    <!--&lt;!&ndash; Inner Menu: contains the notifications &ndash;&gt;-->
+                                    <!--<ul class="menu">-->
+                                        <!--<li>&lt;!&ndash; start notification &ndash;&gt;-->
+                                            <!--<a th:href="@{#}">-->
+                                                <!--<i class="fa fa-users text-aqua"></i> 234 new members joined today-->
+                                            <!--</a>-->
+                                        <!--</li>-->
+                                        <!--&lt;!&ndash; end notification &ndash;&gt;-->
+                                    <!--</ul>-->
+                                <!--</li>-->
+                                <!--<li class="footer"><a th:href="@{#}">View all</a></li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+
+                        <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                            <a th:href="@{#}" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img th:src="@{'/../file/'+${mahasiswaJabatanLogged.mahasiswa.path}}" class="user-image" alt="User Image" />
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span th:text="${mahasiswaJabatanLogged.mahasiswa.namaLengkap}"></span>
+                            </a>
+                            <ul class="dropdown-menu" >
+                                <!-- The user image in the menu -->
+                                <li class="user-header">
+                                    <img th:src="@{'/../file/'+${mahasiswaJabatanLogged.mahasiswa.path}}"  class="img-circle" alt="User Image" />
+
+                                    <p th:inline="text">
+                                        [[${mahasiswaJabatanLogged.mahasiswa.namaLengkap}]]
+                                        <small th:text="${mahasiswaJabatanLogged.mahasiswa.nim}+' - '+${mahasiswaJabatanLogged.jabatan.deskripsi}"></small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <!--<a th:href="@{#}" class="btn btn-default btn-flat">Profile</a>-->
+                                    </div>
+                                    <div class="pull-center">
+                                        <a th:href="@{/user/logout}" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-custom-menu -->
+            </div>
+
+        </nav>
+    </header>
+
+    <!--content-->
+    <div class="content-wrapper" layout:fragment="content"></div>
+
+
+    <!-- Full Width Column -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.3.8
+            </div>
+            <strong>Copyright &copy; 2014-2016 <a th:href="'/'">Sistem Informasi BEM Institut Teknologi Del</a>.</strong> All rights
+            reserved.
+        </div>
+        <!-- /.container -->
+    </footer>
+
+</div>
+
+
+<div>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <!-- Morris.js charts -->
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js}"></script>
+    <script th:src="@{/../plugins/morris/morris.min.js}"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script th:src="@{/../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js}"></script>
+    <!-- Slimscroll -->
+    <script th:src="@{/../plugins/slimScroll/jquery.slimscroll.min.js}"></script>
+    <!-- FastClick -->
+    <script th:src="@{/../plugins/fastclick/fastclick.js}"></script>
+    <!-- AdminLTE App -->
+    <script th:src="@{/../dist/js/app.min.js}"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script th:src="@{/../dist/js/pages/dashboard.js}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script th:src="@{/../dist/js/demo.js}"></script>
+    <!-- jQuery 2.2.3 -->
+    <script th:src="@{/../plugins/jQuery/jquery-2.2.3.min.js}"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script th:src="@{/../bootstrap/js/bootstrap.min.js}"></script>
+</div>
+
+<div layout:fragment="script">
+</div>
+
+
+</body>
+</html>

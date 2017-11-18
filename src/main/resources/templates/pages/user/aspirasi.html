@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org"
+      layout:decorator="/index" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Mengelola Aspirasi</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+</head>
+<body>
+<!-- /.box-header -->
+<div class="box-body" th:fragment="resultAspirasiList">
+    <table id="tabelDaftarAspirasi" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Judul</th>
+            <th>Tanggal Unggah</th>
+            <th>Oleh</th>
+            <th>Status</th>
+            <th th:if="${mahasiswaJabatanLogged.jabatan.namaJabatan == 'KETUABEM'}">Option</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="as : ${aspirasis}">
+                <td th:text="${as.id}"></td>
+                <td><a th:text="${as.judulAspirasi}" th:href="'/aspirasi/daftar-aspirasi/detail/'+${as.id}"></a></td>
+                <td th:text="${as.tgl_dibuat}"></td>
+                <td th:text="${as.mahasiswa.namaLengkap}"></td>
+                <td th:text="${as.status}"></td>
+                <td th:if="${mahasiswaJabatanLogged.jabatan.namaJabatan == 'KETUABEM'}"><a th:href="'/user/aspirasi/update/'+${as.id}" class="btn btn-primary btn-sm">Approve</a></td>
+            </tr>
+            <tr>
+                <td th:if="${#lists.isEmpty(aspirasis)}" th:colspan="5" style="text-align: center">Anda belum pernah memngirimkan aspirasi</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

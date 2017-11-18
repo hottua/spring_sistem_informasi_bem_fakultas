@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org" xmlns:xlmns="http://www.w3.org/1999/xhtml"
+      layout:decorator="/index" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Unggah Dokumen</title>
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <div class="container" >
+        <section class="content-header">
+            <h1>Daftar Dokumen</h1>
+            <ol class="breadcrumb">
+                <li><a th:href="'/user/dokumen/daftar-dokumen'"><i class="fa fa-file-pdf-o"></i> Dokumen</a></li>
+                <li class="active">Daftar Dokumen</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <section class="col-lg-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <a class="btn btn-default" th:href="'/user/dokumen/ungah-dokumen'"><i class="fa fa-upload"></i> Unggah dokumen</a>
+                            <div class="pull-right">
+
+                                <div class="box-tools">
+                                    <div class="input-group input-group-sm" style="width: 200px;">
+
+                                        <input type="text" id="textSearch" name="table_search" class="form-control pull-right" placeholder="Search" />
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-default" onclick="searchDokumen()"><i class="fa fa-search"></i></button>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div id="daftarDokumen">
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+
+                </section>
+            </div>
+        </section>
+    </div>
+</div>
+<div layout:fragment="script" >
+
+    <script>
+        var urlDaftar = '/user/getAllDokumen';
+        $("#daftarDokumen").load(urlDaftar);
+
+        function onKlik(idDokumen) {
+            if (confirm("Hapus Kelas dengan kode"+idDokumen)) {
+                var url = '/user/dokumen/delete';
+                url = url + '/' + idDokumen;
+                $("#daftarDokumen").load(url);
+
+            }
+        }
+    </script>
+
+    <script>
+        function searchDokumen() {
+            var textSearch = document.getElementById("textSearch").value;
+            var urlDaftar = '/user/dokumen/search/'+textSearch;
+            $("#daftarDokumen").load(urlDaftar);
+
+        }
+    </script>
+
+</div>
+</body>
+</html>
